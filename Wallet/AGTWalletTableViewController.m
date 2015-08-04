@@ -86,7 +86,7 @@
     }
     
 
-    cell.textLabel.text  = [NSString stringWithFormat:@"%d %@",money.amount, money.currency];
+    cell.textLabel.text  = [NSString stringWithFormat:@"%lu %@",(unsigned long)money.amount, money.currency];
     
     // Devolverla
     return cell;

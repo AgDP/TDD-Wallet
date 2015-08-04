@@ -70,9 +70,10 @@
 
 -(void) testTakeMoneyAtIndex{
     //Index Comienza en 0
+    int amount = 10;
     AGTMoney *money = [self.wallet moneysWithCurrency:@"EUR" atIndex:1];
     
-    XCTAssertEqual(money.amount, 10);
+    XCTAssertEqual([money.amount integerValue], amount);
 }
 
 @end

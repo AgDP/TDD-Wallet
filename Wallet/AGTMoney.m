@@ -10,7 +10,7 @@
 #import "AGTBroker.h"
 
 @interface AGTMoney ()
-@property(nonatomic) NSUInteger amount;
+@property (nonatomic, strong) NSNumber *amount;
 @end
 
 @implementation AGTMoney
@@ -31,7 +31,7 @@
 
 -(id) initWithAmount: (NSUInteger) amount currency: (NSString *) currency{
     if (self = [super init]) {
-        _amount = amount;
+        _amount = @(amount);
         _currency = currency;
     }
     
@@ -39,13 +39,13 @@
 }
 
 -(id<AGTMoney>) times: (NSUInteger) multiplier{
-    return [[AGTMoney alloc] initWithAmount:_amount * multiplier currency:self.currency];
+    return [[AGTMoney alloc] initWithAmount:[self.amount integerValue] * multiplier currency:self.currency];
     
 }
 
 -(id<AGTMoney>) plus: (AGTMoney *) other{
     
-    NSInteger totalAmount = self.amount + other.amount;
+    NSInteger totalAmount = [self.amount integerValue] + [other.amount integerValue];
     AGTMoney *total = [[AGTMoney alloc] initWithAmount:totalAmount currency:self.currency];
     
     return total;
@@ -64,7 +64,7 @@
         [NSException raise:@"NoconversionRateException" format:@"Must have a conversion from %@ to %@", self.currency, currency];
     }else{
         
-        NSInteger newAmount = self.amount * rate;
+        NSInteger newAmount = [self.amount integerValue] * rate;
         
         result = [[AGTMoney alloc] initWithAmount:newAmount currency:currency];
     }
@@ -78,7 +78,7 @@
 
 -(NSString *) description{
     
-    return [NSString stringWithFormat:@"<%@: %@ %d>",[self class], self.currency, self.amount];
+    return [NSString stringWithFormat:@"<%@: %@ %@>",[self class], self.currency, self.amount];
 }
 
 -(BOOL) isEqual:(id)object{
@@ -92,7 +92,7 @@
 }
 
 -(NSUInteger) hash{
-    return self.amount;
+    return [self.amount integerValue];
 }
 
 @end

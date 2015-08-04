@@ -25,7 +25,7 @@
 @interface AGTMoney : NSObject<AGTMoney>
 
 @property (copy, readonly) NSString *currency;
-@property(nonatomic, readonly) NSUInteger amount;
+@property (nonatomic, strong, readonly) NSNumber *amount;
 
 +(instancetype) dollarWithAmount: (NSUInteger) amount;
 +(instancetype) euroWithAmount: (NSUInteger) amount;

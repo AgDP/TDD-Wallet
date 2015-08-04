@@ -60,13 +60,14 @@
 }
 
 -(void) testAmountStorage{
-    AGTMoney *euro = [AGTMoney euroWithAmount:2];
+    int amount = 10;
+    AGTMoney *euro = [AGTMoney euroWithAmount:amount];
     
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wundeclared-selector"
-    //XCTAssertEqual(2, [[euro performSelector:@selector(amount)] integerValue], @"The value retieved should be the same as the stored");
+    XCTAssertEqual(amount, [[euro performSelector:@selector(amount)] integerValue], @"The value retieved should be the same as the stored");
     
-    //XCTAssertEqual(2, [[[AGTMoney dollarWithAmount:2]performSelector:@selector(amount)] integerValue], @"The value retieved should be the same as the stored");
+    XCTAssertEqual(amount, [[[AGTMoney dollarWithAmount:amount]performSelector:@selector(amount)] integerValue], @"The value retieved should be the same as the stored");
 #pragma clang diagnostic pop
 }
 

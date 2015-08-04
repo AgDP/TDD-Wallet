@@ -97,12 +97,12 @@
 
 -(AGTMoney *) moneysWithCurrency: (NSString *) currency atIndex: (NSInteger) index{
     AGTMoney *money = nil;
-    int count = 0;
-    int totalAmount = 0;
+    long count = 0;
+    long totalAmount = 0;
     
     for (AGTMoney *m in self.moneys) {
         if ([m.currency isEqualToString:currency]) {
-            totalAmount = totalAmount + m.amount;
+            totalAmount = totalAmount + [m.amount integerValue];
             if (count == index) {
                 money = m;
                 break;
